@@ -7,7 +7,11 @@ const { spawn } = require("child_process")
 const defaultInclude = path.resolve(__dirname, "source")
 
 module.exports = {
-  entry: defaultInclude,
+  entry: path.join(__dirname, "source", "index.js"),
+  output: {
+    path: path.resolve(__dirname, './dist'),
+    filename: 'bundle.js'
+  },
   module: {
     rules: [
       {
@@ -16,6 +20,13 @@ module.exports = {
           { loader: "style-loader" },
           { loader: "css-loader" },
           { loader: "sass-loader" }],
+        include: defaultInclude
+      },
+      {
+        test: /\.html$/,
+        use: [
+          { loader: "html-loader" },
+        ],
         include: defaultInclude
       },
       {
@@ -35,7 +46,9 @@ module.exports = {
   },
   target: "electron-renderer",
   plugins: [
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, "source", "index.html")
+    }),
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify("development")
     })

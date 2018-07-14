@@ -20,9 +20,11 @@ function createWindow() {
 
   // and load the index.html of the app.
   let indexPath
+  console.log("Argv: " + process.argv);
 
   if (dev && process.argv.indexOf("--noDevServer") === -1)
   {
+    console.log("Localhost");
     indexPath = url.format({
       protocol: "http:",
       host: "localhost:8080",
@@ -32,9 +34,10 @@ function createWindow() {
   }
   else
   {
+    console.log("Index");
     indexPath = url.format({
       protocol: "file:",
-      pathname: path.join(__dirname, "dist", "index.html"),
+      pathname: path.join(__dirname, "index.html"),
       slashes: true
     })
   }

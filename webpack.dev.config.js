@@ -10,7 +10,7 @@ const defaultInclude = path.resolve(__dirname, "source")
 module.exports = {
   entry: [path.join(__dirname, "source", "index.js"), path.join(__dirname, "source", "scss", "main.scss")],
   output: {
-    path: path.resolve(__dirname, "./dist"),
+    path: path.resolve(__dirname, "dist"),
     filename: "bundle.js"
   },
   module: {

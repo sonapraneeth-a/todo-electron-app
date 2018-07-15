@@ -11,8 +11,7 @@
     "build": "webpack --config webpack.prod.config.js --mode production",
     "package": "npm run build && npm run postpackage:current",
     "postpackage:current": "electron-packager --prune=true --overwrite . --out=./build",
-    "postpackage:linux-amd64": "electron-packager --prune=true --overwrite --asar=true --platform=linux --arch=x64 . --out=./build",
-    "postpackage:all": "electron-packager --prune=true -all --overwrite . --out=./build"
+    "postpackage:linux-amd64": "electron-packager --prune=true --overwrite --asar=true --platform=linux --arch=x64 . --out=./build"
   },
   "repository": {
     "type": "git",

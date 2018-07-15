@@ -10,13 +10,23 @@ const url = require("url")
 let mainWindow
 let dev = false;
 
-if (process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) || /[\\/]electron[\\/]/.test(process.execPath)) {
+console.log(" Process app: " + process.defaultApp)
+console.log("Process exec: " + process.execPath)
+console.log("Process argv: " + process.argv);
+console.log("    Dir name: " + __dirname);
+
+if (process.defaultApp || 
+   /[\\/]electron-prebuilt[\\/]/.test(process.execPath) || 
+   /[\\/]electron[\\/]/.test(process.execPath))
+{
   dev = true
 }
 
-function createWindow() {
+function createWindow()
+{
   // Create the browser window.
-  mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow
+  ({
     width: 1024,
     height: 768,
     show: false
@@ -24,12 +34,12 @@ function createWindow() {
 
   // and load the index.html of the app.
   let indexPath
-  console.log("Argv: " + process.argv);
 
   if (dev && process.argv.indexOf("--noDevServer") === -1)
   {
-    console.log("Localhost");
-    indexPath = url.format({
+    console.log("Loading from localhost");
+    indexPath = url.format
+    ({
       protocol: "http:",
       host: "localhost:8080",
       pathname: "index.html",
@@ -38,23 +48,25 @@ function createWindow() {
   }
   else
   {
-    console.log("Index");
-    indexPath = url.format({
+    console.log("Loading from file system");
+    indexPath = url.format
+    ({
       protocol: "file:",
-      pathname: path.join(__dirname, "index.html"),
+      pathname: path.join(__dirname, "..", "dist", "index.html"),
       slashes: true
     })
   }
 
-  mainWindow.loadURL(indexPath)
+  mainWindow.loadURL(indexPath);
 
   // Don"t show until we are ready and loaded
   mainWindow.once("ready-to-show", () => {
-    mainWindow.show()
+    mainWindow.show();
 
     // Open the DevTools automatically if developing
-    if (dev) {
-      mainWindow.webContents.openDevTools()
+    if (dev)
+    {
+      mainWindow.webContents.openDevTools();
     }
   })
 
@@ -63,21 +75,21 @@ function createWindow() {
     // Dereference the window object, usually you would store windows
     // in an array if your app supports multi windows, this is the time
     // when you should delete the corresponding element.
-    mainWindow = null
+    mainWindow = null;
   })
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on("ready", createWindow)
+app.on("ready", createWindow);
 
 // Quit when all windows are closed.
 app.on("window-all-closed", () => {
   // On macOS it is common for applications and their menu bar
   // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== "darwin") {
-    app.quit()
+    app.quit();
   }
 })
 
@@ -85,6 +97,6 @@ app.on("activate", () => {
   // On macOS it"s common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
-    createWindow()
+    createWindow();
   }
 })

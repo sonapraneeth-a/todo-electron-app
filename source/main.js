@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 
 // Import parts of electron to use
 const { app, BrowserWindow } = require("electron")
@@ -8,7 +8,11 @@ const url = require("url")
 // Keep a global reference of the window object, if you don"t, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
-let dev = true;
+let dev = false;
+
+if (process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) || /[\\/]electron[\\/]/.test(process.execPath)) {
+  dev = true
+}
 
 function createWindow() {
   // Create the browser window.

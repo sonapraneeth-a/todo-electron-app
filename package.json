@@ -30,6 +30,8 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@material-ui/core": "^1.4.0",
+    "@material-ui/icons": "^1.1.0",
     "electron-squirrel-startup": "^1.0.0",
     "electron-winstaller": "^2.6.4",
     "react": "^16.4.1",

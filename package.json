@@ -1,5 +1,5 @@
 {
-  "name": "electron-react-webpack-sass",
+  "name": "electron_react",
   "version": "0.1.0",
   "description": "Base code for electron apps with react, webpack and sass",
   "main": "source/main.js",
@@ -30,6 +30,8 @@
   },
   "license": "MIT",
   "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-winstaller": "^2.6.4",
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
   },

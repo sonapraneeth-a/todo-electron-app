@@ -37,7 +37,8 @@ function createWindow()
   ({
     width: 1024,
     height: 768,
-    show: false
+    show: false,
+    defaultEncoding: "utf-8"
   })
 
   // and load the index.html of the app.
@@ -109,6 +110,7 @@ app.on("activate", () => {
   }
 })
 
+/**/
 
 function handleSquirrelEvent(application) {
   if (process.argv.length === 1) {

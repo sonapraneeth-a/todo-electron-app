@@ -13,4 +13,4 @@ import popper from "popper.js";
 // document.body.appendChild(root);
 
 // Now we can render our application into it
-render(<App content="Test" />, document.getElementById("react-app"));
+render(<App/>, document.getElementById("react-app"));

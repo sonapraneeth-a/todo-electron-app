@@ -1,9 +1,9 @@
 {
-  "name": "electron_react",
+  "name": "todo_app",
   "version": "0.1.0",
   "description": "Base code for electron apps with react, webpack and sass",
   "main": "source/main.js",
-  "productName": "ElectronApp",
+  "productName": "TodoApp",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "webpack-dev-server --color --progress --hot --config=./webpack.dev.config.js --mode development",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://sonapraneeth-a.github.io/electron-react-webpack-sass.git"
+    "url": "https://sonapraneeth-a.github.io/todo-app.git"
   },
   "keywords": [
     "electron",

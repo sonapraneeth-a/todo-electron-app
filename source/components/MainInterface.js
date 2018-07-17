@@ -1,8 +1,15 @@
 import React from "react";
+import moment from "moment";
+
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Checkbox from '@material-ui/core/Checkbox';
 
-import TodoCard from "./TodoCard";
+import TodoModal from "./TodoModal";
+import TodoItem from "./TodoItem";
 
 class MainInterface extends React.Component
 {
@@ -10,31 +17,59 @@ class MainInterface extends React.Component
   {
     super();
     this.state = {
-      showTodoFill: false
+      showTodoModal: false,
+      todoList: [],
     }
   }
 
   toggleTodo()
   {
-    console.log("Main interface: " + this.state.showTodoFill);
     this.setState({
-      showTodoFill: !this.state.showTodoFill
+      showTodoModal: !this.state.showTodoModal
     })
   }
 
-  handleForCard(open)
+  handleForTodoModal(open)
   {
-    console.log("Handle main interface: " + open);
     this.setState({
-      showTodoFill: open
+      showTodoModal: open
     })
+  }
+
+  handleForTodoInfo(todo_info)
+  {
+    let todoList = this.state.todoList.slice(0, 3);
+    this.setState({
+      todoList: todoList.concat(todo_info)
+    })
+    this.render();
   }
 
   render()
   {
+    const todoItems = this.state.todoList.map((step, move) =>
+    {
+      const todoTitle = this.state.todoList[move].title;
+      const todoDetails = this.state.todoList[move].details;
+      const todoDate = this.state.todoList[move].date;
+      const todoTime = this.state.todoList[move].time;
+      return (
+        <TodoItem
+          key={move} 
+          todoTitle={todoTitle}
+          todoDetails={todoDetails}
+          todoDate={todoDate}
+          todoTime={todoTime}
+          itemNo={move}
+        />
+      );
+    });
     return (
       <div className="main-interface">
-        <div className="todos">
+        <div className="todo-list">
+          <List>
+            {todoItems}
+          </List>
         </div>
         <Button
           variant="fab" color="primary" 
@@ -44,10 +79,11 @@ class MainInterface extends React.Component
           <AddIcon />
         </Button>
         {
-          this.state.showTodoFill &&
-          <TodoCard 
-            display={this.state.showTodoFill}
-            handleForCard={this.handleForCard.bind(this)}
+          this.state.showTodoModal &&
+          <TodoModal 
+            display={this.state.showTodoModal}
+            handleForTodoModal={this.handleForTodoModal.bind(this)}
+            handleForTodoInfo={this.handleForTodoInfo.bind(this)}
           />
         }
       </div>

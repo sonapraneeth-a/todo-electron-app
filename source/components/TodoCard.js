@@ -6,6 +6,7 @@ import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
+import TextField from '@material-ui/core/TextField';
 
 class TodoCard extends React.Component
 {
@@ -25,7 +26,7 @@ class TodoCard extends React.Component
       open: open_status
     })
     console.log("Todo card: " + this.state.open);
-    this.props.handleForCard(open_status);
+    this.props.handleForTodo(open_status);
   }
 
   render()
@@ -38,7 +39,25 @@ class TodoCard extends React.Component
           <IconButton style={{"position": "absolute", "top": "10px", "right": "10px"}} aria-label="Close Modal">
             <CloseIcon onClick={this.toggleCard.bind(this)}/>
           </IconButton>
-          <h1>Name</h1>
+          <h4>Create todo</h4>
+          <form className="" style={{"display": "flex", "flexWrap": "wrap", "flexDirection": "column"}} noValidate autoComplete="off">
+            <TextField
+              id="name"
+              label="Headline"
+              className=""
+              defaultValue={"trama"}
+              margin="normal"
+            />
+            <TextField
+              id="multiline-flexible"
+              label="Multiline"
+              multiline
+              rowsMax="4"
+              defaultValue={"Details"}
+              className={""}
+              margin="normal"
+            />
+          </form>
         </div>
       </Card>
     );

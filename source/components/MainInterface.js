@@ -1,5 +1,7 @@
 import React from "react";
 import moment from "moment";
+import fs from "fs";
+import path from "path";
 
 import AddIcon from '@material-ui/icons/Add';
 import Button from '@material-ui/core/Button';
@@ -16,9 +18,22 @@ class MainInterface extends React.Component
   constructor()
   {
     super();
+    console.log("Name: " + process.env.USERPROFILE);
+    let listLocation = path.join(process.env.USERPROFILE, "\\Documents", "\\TodoApp", "data.json");
+    console.log("Location: " + listLocation)
+    let loadTodoList = [];
+    if (fs.existsSync(listLocation))
+    {
+      loadTodoList = JSON.parse(fs.readFileSync(listLocation));
+      console.log("Load: " + loadTodoList);
+    }
+    else
+    {
+      console.log("No todo");
+    }
     this.state = {
       showTodoModal: false,
-      todoList: [],
+      todoList: loadTodoList,
     }
   }
 
@@ -43,6 +58,25 @@ class MainInterface extends React.Component
       todoList: todoList.concat(todo_info)
     })
     this.render();
+  }
+
+  componentDidUpdate()
+  {
+    let listDir = path.join(process.env.USERPROFILE, "\\Documents", "\\TodoApp");
+    let listLocation = path.join(process.env.USERPROFILE, "\\Documents", "\\TodoApp", "data.json");
+    if (!fs.existsSync(listDir))
+    {
+      fs.mkdirSync(listDir);
+    }
+    console.log("Location: " + listLocation)
+    fs.writeFile(
+      listLocation,
+      JSON.stringify(this.state.todoList), "utf-8", 
+      function(err)
+      {
+        if(err) { console.log(err); }
+      }
+    );
   }
 
   render()

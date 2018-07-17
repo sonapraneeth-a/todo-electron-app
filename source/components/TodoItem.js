@@ -1,13 +1,28 @@
 import React from "react";
+import PropTypes from 'prop-types';
+import moment from "moment";
 
+import { withStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
+
+
+const styles = theme => ({
+  timeItem: {
+   textAlign: "right",
+  },
+});
 
 class TodoItem extends React.Component
 {
   render()
   {
+    const { classes } = this.props;
+    const dispDate = moment(this.props.todoDate, 'YYYY-MM-DD');
+    const dispDateString = dispDate.format('DD MMMM YYYY');
+    const dispTime = moment(this.props.todoTime, 'YYYY-MM-DD HH:mm');
+    const dispTimeString = dispTime.format('DD MMMM YYYY HH:mm');
     return (
       <ListItem
         key={this.props.itemNo}
@@ -26,11 +41,18 @@ class TodoItem extends React.Component
           secondary={this.props.todoDetails}
         />
         <ListItemText
-          primary={this.props.todoDate}
+          primary={dispDateString}
+          secondary={dispTimeString}
+          className={classes.timeItem}
         />
       </ListItem>
     );
   }
 }
 
-export default TodoItem;
+TodoItem.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+
+export default withStyles(styles)(TodoItem);

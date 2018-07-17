@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 const styles = theme => ({
   button: {
     margin: theme.spacing.unit,
-    textTransform: "none",
+    //textTransform: "none",
   },
   leftIcon: {
     marginRight: theme.spacing.unit,
@@ -135,7 +135,7 @@ class TodoModal extends React.Component
             onClick={this.toggleModal.bind(this)}>
             <CloseIcon />
           </IconButton>
-          <h4>Create Todo</h4>
+          <h3>Create Todo</h3>
           <form
             onSubmit={this.handleSubmit}
             className={classes.formContainer}

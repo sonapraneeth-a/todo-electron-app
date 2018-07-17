@@ -85,15 +85,15 @@ class MainInterface extends React.Component
     {
       const todoTitle = this.state.todoList[move].title;
       const todoDetails = this.state.todoList[move].details;
-      const todoDate = this.state.todoList[move].date;
-      const todoTime = this.state.todoList[move].time;
+      const todoDueDate = this.state.todoList[move].dueDate;
+      const todoReminderTime = this.state.todoList[move].reminderTime;
       return (
         <TodoItem
           key={move} 
           todoTitle={todoTitle}
           todoDetails={todoDetails}
-          todoDate={todoDate}
-          todoTime={todoTime}
+          todoDueDate={todoDueDate}
+          todoReminderTime={todoReminderTime}
           itemNo={move}
         />
       );

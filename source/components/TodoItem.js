@@ -19,9 +19,9 @@ class TodoItem extends React.Component
   render()
   {
     const { classes } = this.props;
-    const dispDate = moment(this.props.todoDate, 'YYYY-MM-DD');
+    const dispDate = moment(this.props.todoDueDate, 'YYYY-MM-DD');
     const dispDateString = dispDate.format('DD MMMM YYYY');
-    const dispTime = moment(this.props.todoTime, 'YYYY-MM-DD HH:mm');
+    const dispTime = moment(this.props.todoReminderTime, 'YYYY-MM-DD HH:mm');
     const dispTimeString = dispTime.format('DD MMMM YYYY HH:mm');
     return (
       <ListItem

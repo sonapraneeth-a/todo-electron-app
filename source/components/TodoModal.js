@@ -42,14 +42,14 @@ class TodoModal extends React.Component
     this.todo = {
       title: "Title for the TODO",
       details: "Details about the TODO",
-      date: moment().format("YYYY-MM-DD"),
-      time: moment().format("YYYY-MM-DD HH:mm"),
+      dueDate: moment().format("YYYY-MM-DD"),
+      reminderTime: moment().format("YYYY-MM-DD HH:mm"),
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTitle = this.handleTitle.bind(this);
     this.handleDetails = this.handleDetails.bind(this);
-    this.handleDate = this.handleDate.bind(this);
-    this.handleTime = this.handleTime.bind(this);
+    this.handleDueDate = this.handleDueDate.bind(this);
+    this.handleReminderTime = this.handleReminderTime.bind(this);
   }
 
   toggleModal()
@@ -67,8 +67,8 @@ class TodoModal extends React.Component
     let todo_info = {
       title: this.todo.title,
       details: this.todo.details,
-      date: this.todo.date,
-      time: this.todo.time
+      dueDate: this.todo.dueDate,
+      reminderTime: this.todo.reminderTime
     }
     this.toggleModal();
     this.props.handleForTodoInfo(todo_info);
@@ -80,8 +80,8 @@ class TodoModal extends React.Component
     this.todo = {
       title: event.target.value,
       details: this.todo.details,
-      date: this.todo.date,
-      time: this.todo.time,
+      dueDate: this.todo.dueDate,
+      reminderTime: this.todo.reminderTime,
     }
   }
 
@@ -91,30 +91,30 @@ class TodoModal extends React.Component
     this.todo = {
       title: this.todo.title,
       details: event.target.value,
-      date: this.todo.date,
-      time: this.todo.time,
+      dueDate: this.todo.dueDate,
+      reminderTime: this.todo.reminderTime,
     }
   }
 
-  handleDate(event)
+  handleDueDate(event)
   {
     event.preventDefault();
     this.todo = {
       title: this.todo.title,
       details: this.todo.details,
-      date: event.target.value,
-      time: this.todo.time,
+      dueDate: event.target.value,
+      reminderTime: this.todo.reminderTime,
     }
   }
 
-  handleTime(event)
+  handleReminderTime(event)
   {
     event.preventDefault();
     this.todo = {
       title: this.todo.title,
       details: this.todo.details,
-      date: this.todo.date,
-      time: event.target.value,
+      dueDate: this.todo.dueDate,
+      reminderTime: event.target.value,
     }
   }
 
@@ -151,19 +151,19 @@ class TodoModal extends React.Component
               placeholder={this.todo.title}
             />
             <TextField
-              id="date"
+              id="dueDate"
               label="Due date"
               type="date"
-              defaultValue={this.todo.date}
-              onChange={this.handleDate}
+              defaultValue={this.todo.dueDate}
+              onChange={this.handleDueDate}
               margin="dense"
             />
             <TextField
-              id="time"
+              id="reminderTime"
               label="Remind me"
               type="datetime"
-              defaultValue={this.todo.time}
-              onChange={this.handleTime}
+              defaultValue={this.todo.reminderTime}
+              onChange={this.handleReminderTime}
               margin="dense"
             />
             <TextField

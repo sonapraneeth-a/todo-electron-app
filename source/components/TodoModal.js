@@ -147,15 +147,29 @@ class TodoModal extends React.Component
             className={classes.formContainer}
             noValidate autoComplete="on"
           >
-            <TextField
-              id="title"
-              label="Title"
-              defaultValue={""}
-              margin="dense"
-              onChange={this.handleTitle}
-              helperText="Add a title for your Todo item"
-              placeholder={"Title for the TODO"}
-            />
+            { this.todo.title != "" && this.todo.title != null && 
+                <TextField
+                  id="title"
+                  label="Title"
+                  defaultValue={""}
+                  margin="dense"
+                  onChange={this.handleTitle}
+                  helperText="Add a title for your Todo item"
+                  placeholder={"Title for the TODO"}
+                />
+            }
+            { (this.todo.title == "" || this.todo.title == null) && 
+                <TextField
+                  error
+                  id="title"
+                  label="Title"
+                  defaultValue={""}
+                  margin="dense"
+                  onChange={this.handleTitle}
+                  helperText="Add a title for your Todo item"
+                  placeholder={"Title for the TODO"}
+                />
+            }
             <TextField
               id="dueDate"
               label="Due date"

@@ -40,10 +40,11 @@ class TodoModal extends React.Component
       open: this.props.display,
     };
     this.todo = {
-      title: "Title for the TODO",
-      details: "Details about the TODO",
+      title: "",
+      details: "",
       dueDate: moment().format("YYYY-MM-DD"),
       reminderTime: moment().format("YYYY-MM-DD HH:mm"),
+      status: "Pending",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTitle = this.handleTitle.bind(this);
@@ -68,7 +69,8 @@ class TodoModal extends React.Component
       title: this.todo.title,
       details: this.todo.details,
       dueDate: this.todo.dueDate,
-      reminderTime: this.todo.reminderTime
+      reminderTime: this.todo.reminderTime,
+      status: this.todo.status
     }
     this.toggleModal();
     this.props.handleForTodoInfo(todo_info);
@@ -82,6 +84,7 @@ class TodoModal extends React.Component
       details: this.todo.details,
       dueDate: this.todo.dueDate,
       reminderTime: this.todo.reminderTime,
+      status: this.todo.status,
     }
   }
 
@@ -93,6 +96,7 @@ class TodoModal extends React.Component
       details: event.target.value,
       dueDate: this.todo.dueDate,
       reminderTime: this.todo.reminderTime,
+      status: this.todo.status,
     }
   }
 
@@ -104,6 +108,7 @@ class TodoModal extends React.Component
       details: this.todo.details,
       dueDate: event.target.value,
       reminderTime: this.todo.reminderTime,
+      status: this.todo.status,
     }
   }
 
@@ -115,6 +120,7 @@ class TodoModal extends React.Component
       details: this.todo.details,
       dueDate: this.todo.dueDate,
       reminderTime: event.target.value,
+      status: this.todo.status,
     }
   }
 
@@ -148,7 +154,7 @@ class TodoModal extends React.Component
               margin="dense"
               onChange={this.handleTitle}
               helperText="Add a title for your Todo item"
-              placeholder={this.todo.title}
+              placeholder={"Title for the TODO"}
             />
             <TextField
               id="dueDate"
@@ -175,7 +181,7 @@ class TodoModal extends React.Component
               onChange={this.handleDetails}
               margin="dense"
               helperText="Add a description for your Todo item"
-              placeholder={this.todo.details}
+              placeholder={"Details about the TODO"}
             />
             <div className={classes.buttonContainer}>
               <Button type="submit" variant="contained" size="small" color="primary" className={classes.button}>

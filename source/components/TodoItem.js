@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import moment from "moment";
+import marked from "marked";
 
 import { withStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
@@ -82,7 +83,7 @@ class TodoItem extends React.Component
             className={"collapse"}
             data-parent={this.props.id}>
             <div className="card-body">
-              <p dangerouslySetInnerHTML={{__html: todoDetails}}/>
+              <p dangerouslySetInnerHTML={{__html: marked(this.props.todoDetails)}}/>
             </div>
           </div>
         </div>

@@ -140,7 +140,7 @@ class TodoModal extends React.Component
               </div>
               <div className="input-group" key="createDetailsDiv1" style={{margin: "10px auto"}}>
                 <div className="input-group-prepend" key="createDetailsDiv2">
-                  <label className="input-group-text" key="createDetailsDiv3" style={{width: "150px"}} htmlFor="inputGroupSelect04">Details</label>
+                  <label className="input-group-text" key="createDetailsDiv3" style={{width: "150px"}} htmlFor="inputGroupSelect04">Details (Markdown supported)</label>
                 </div>
                 <textarea key="createTodoDetails" type="text" rows="4" className="form-control is-valid" placeholder={"Details for the TODO"} aria-label="TodoDetails" aria-describedby="basic-addon4" onChange={this.handleDetails}/>
               </div>

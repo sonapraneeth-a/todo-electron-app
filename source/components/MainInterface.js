@@ -66,6 +66,17 @@ class MainInterface extends React.Component
     })
   }
 
+  handleForCompletedItem(itemNo)
+  {
+    console.log("Completed item: " + itemNo);
+    let todoList = this.state.todoList.slice(0, this.state.todoList.length+1);
+    todoList[itemNo].status = (todoList[itemNo].status === "Pending" ? "Completed": "Pending");
+    console.log("Completed Item: " + JSON.stringify(todoList[itemNo]));
+    this.setState({
+      todoList: todoList,
+    })
+  }
+
   handleForTodoInfo(todo_info)
   {
     let todoList = this.state.todoList.slice(0, this.state.todoList.length+1);
@@ -113,6 +124,7 @@ class MainInterface extends React.Component
           todoStatus={todoStatus}
           itemNo={move}
           handleForDeleteItem={this.handleForDeleteItem.bind(this)}
+          handleForCompletedItem={this.handleForCompletedItem.bind(this)}
         />
       );
     });

@@ -23,6 +23,11 @@ class TodoItem extends React.Component
     this.props.handleForDeleteItem(this.props.itemNo);
   }
 
+  completedItem()
+  {
+    this.props.handleForCompletedItem(this.props.itemNo);
+  }
+
   render()
   {
     const { classes } = this.props;
@@ -30,6 +35,7 @@ class TodoItem extends React.Component
     const dispDateString = dispDate.format('DD MMMM YYYY');
     const dispTime = moment(this.props.todoReminderTime, 'YYYY-MM-DD HH:mm A');
     const dispTimeString = dispTime.format('DD MMMM YYYY HH:mm A');
+    const checkboxValue = (this.props.todoStatus === "Pending" ? false : true);
     return (
       <ListItem
         key={this.props.itemNo}
@@ -39,9 +45,10 @@ class TodoItem extends React.Component
         className={""}
       >
         <Checkbox
-          checked={false}
+          checked={checkboxValue}
           tabIndex={-1}
           disableRipple
+          onClick={this.completedItem.bind(this)}
         />
         <ListItemText
           primary={this.props.todoTitle}

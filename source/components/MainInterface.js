@@ -13,6 +13,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import BootstrapButton from "./bootstrap/Button";
 
 import TodoModal from "./TodoModal";
+import TestModal from "./TestModal";
 import TodoItem from "./TodoItem";
 
 class MainInterface extends React.Component
@@ -83,6 +84,7 @@ class MainInterface extends React.Component
 
   handleForTodoInfo(todo_info)
   {
+    console.log("Main interface::Handle for todo infoi");
     let todoList = this.state.todoList.slice(0, this.state.todoList.length+1);
     this.setState({
       todoList: todoList.concat(todo_info)
@@ -189,13 +191,13 @@ class MainInterface extends React.Component
           onClick={this.toggleTodo.bind(this)}>
           <AddIcon />
         </BootstrapButton>
-        {
-          this.state.showTodoModal &&
+        { this.state.showTodoModal && 
           <TodoModal
             id={"todoModal"}
             display={this.state.showTodoModal}
             handleForTodoModal={this.handleForTodoModal.bind(this)}
             handleForTodoInfo={this.handleForTodoInfo.bind(this)}
+            onClick={this.toggleTodo.bind(this)}
           />
         }
       </div>

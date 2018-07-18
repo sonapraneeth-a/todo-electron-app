@@ -18,6 +18,11 @@ const styles = theme => ({
 
 class TodoItem extends React.Component
 {
+  deleteItem()
+  {
+    this.props.handleForDeleteItem(this.props.itemNo);
+  }
+
   render()
   {
     const { classes } = this.props;
@@ -47,7 +52,9 @@ class TodoItem extends React.Component
           secondary={dispTimeString}
           className={classes.timeItem}
         />
-        <DeleteIcon color="error"/>
+        <DeleteIcon
+          color="error"
+          onClick={this.deleteItem.bind(this)}/>
       </ListItem>
     );
   }

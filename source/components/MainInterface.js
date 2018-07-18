@@ -34,6 +34,10 @@ class MainInterface extends React.Component
     this.state = {
       showTodoModal: false,
       todoList: loadTodoList,
+      todo: {
+        title: "title4",
+        desc: "desc4",
+      }
     }
   }
 
@@ -51,13 +55,23 @@ class MainInterface extends React.Component
     })
   }
 
+  handleForDeleteItem(itemNo)
+  {
+    console.log("Delete item: " + itemNo);
+    let todoList = this.state.todoList.slice(0, this.state.todoList.length+1);
+    todoList.splice(itemNo, 1);
+    console.log(todoList);
+    this.setState({
+      todoList: todoList,
+    })
+  }
+
   handleForTodoInfo(todo_info)
   {
     let todoList = this.state.todoList.slice(0, this.state.todoList.length+1);
     this.setState({
       todoList: todoList.concat(todo_info)
     })
-    this.render();
   }
 
   componentDidUpdate()
@@ -81,6 +95,7 @@ class MainInterface extends React.Component
 
   render()
   {
+    console.log(JSON.stringify(this.state.todo));
     const todoItems = this.state.todoList.map((step, move) =>
     {
       const todoTitle = this.state.todoList[move].title;
@@ -97,6 +112,7 @@ class MainInterface extends React.Component
           todoReminderTime={todoReminderTime}
           todoStatus={todoStatus}
           itemNo={move}
+          handleForDeleteItem={this.handleForDeleteItem.bind(this)}
         />
       );
     });

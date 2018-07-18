@@ -6,6 +6,8 @@ import { withStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
+import DeleteIcon from '@material-ui/icons/Delete';
+import red from '@material-ui/core/colors/red';
 
 
 const styles = theme => ({
@@ -21,8 +23,8 @@ class TodoItem extends React.Component
     const { classes } = this.props;
     const dispDate = moment(this.props.todoDueDate, 'YYYY-MM-DD');
     const dispDateString = dispDate.format('DD MMMM YYYY');
-    const dispTime = moment(this.props.todoReminderTime, 'YYYY-MM-DD HH:mm');
-    const dispTimeString = dispTime.format('DD MMMM YYYY HH:mm');
+    const dispTime = moment(this.props.todoReminderTime, 'YYYY-MM-DD HH:mm A');
+    const dispTimeString = dispTime.format('DD MMMM YYYY HH:mm A');
     return (
       <ListItem
         key={this.props.itemNo}
@@ -45,6 +47,7 @@ class TodoItem extends React.Component
           secondary={dispTimeString}
           className={classes.timeItem}
         />
+        <DeleteIcon color="error"/>
       </ListItem>
     );
   }

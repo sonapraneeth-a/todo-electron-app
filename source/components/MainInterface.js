@@ -53,7 +53,7 @@ class MainInterface extends React.Component
 
   handleForTodoInfo(todo_info)
   {
-    let todoList = this.state.todoList.slice(0, 3);
+    let todoList = this.state.todoList.slice(0, this.state.todoList.length+1);
     this.setState({
       todoList: todoList.concat(todo_info)
     })

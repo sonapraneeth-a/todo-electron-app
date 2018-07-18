@@ -31,18 +31,20 @@ const styles = theme => ({
   }
 });
 
-class TodoModal extends React.Component
+class TodoModalTodo extends React.Component
 {
   constructor(props)
   {
     super(props);
     this.state = {
       open: this.props.display,
-      todoTitle: "",
-      todoDetails: "",
-      todoDueDate: moment().format("YYYY-MM-DD"),
-      todoReminderTime: moment().format("YYYY-MM-DD HH:mm A"),
-      todoStatus: "Pending",
+    };
+    this.todo = {
+      title: "",
+      details: "",
+      dueDate: moment().format("YYYY-MM-DD"),
+      reminderTime: moment().format("YYYY-MM-DD HH:mm"),
+      status: "Pending",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTitle = this.handleTitle.bind(this);
@@ -64,11 +66,11 @@ class TodoModal extends React.Component
   {
     event.preventDefault();
     let todo_info = {
-      title: this.state.todoTitle,
-      details: this.state.todoDetails,
-      dueDate: this.state.todoDueDate,
-      reminderTime: this.state.todoReminderTime,
-      status: this.state.todoStatus
+      title: this.todo.title,
+      details: this.todo.details,
+      dueDate: this.todo.dueDate,
+      reminderTime: this.todo.reminderTime,
+      status: this.todo.status
     }
     this.toggleModal();
     this.props.handleForTodoInfo(todo_info);
@@ -77,42 +79,58 @@ class TodoModal extends React.Component
   handleTitle(event)
   {
     event.preventDefault();
-    this.setState({
-      todoTitle: event.target.value,
-    });
+    this.todo = {
+      title: event.target.value,
+      details: this.todo.details,
+      dueDate: this.todo.dueDate,
+      reminderTime: this.todo.reminderTime,
+      status: this.todo.status,
+    }
+    this.render();
   }
 
   handleDetails(event)
   {
     event.preventDefault();
-    this.setState({
-      todoDetails: event.target.value,
-    });
+    this.todo = {
+      title: this.todo.title,
+      details: event.target.value,
+      dueDate: this.todo.dueDate,
+      reminderTime: this.todo.reminderTime,
+      status: this.todo.status,
+    }
   }
 
   handleDueDate(event)
   {
     event.preventDefault();
-    this.setState({
-      todoDueDate: event.target.value,
-    });
+    this.todo = {
+      title: this.todo.title,
+      details: this.todo.details,
+      dueDate: event.target.value,
+      reminderTime: this.todo.reminderTime,
+      status: this.todo.status,
+    }
   }
 
   handleReminderTime(event)
   {
     event.preventDefault();
-    this.setState({
-      todoReminderTime: event.target.value,
-    });
+    this.todo = {
+      title: this.todo.title,
+      details: this.todo.details,
+      dueDate: this.todo.dueDate,
+      reminderTime: event.target.value,
+      status: this.todo.status,
+    }
   }
 
   render()
   {
     const { classes } = this.props;
-    const todoTitle = this.state.todoTitle;
-    const todoDetails = this.state.todoDetails;
-    const todoDueDate = this.state.todoDueDate;
-    const todoReminderTime = this.state.todoReminderTime;
+    console.log("Todo: " + JSON.stringify(this.todo));
+    const todoTitle = this.todo.title;
+    console.log("Todo title: " + todoTitle);
     return (
       <Modal
         aria-labelledby="simple-modal-title"
@@ -133,13 +151,13 @@ class TodoModal extends React.Component
             className={classes.formContainer}
             noValidate autoComplete="on"
           >
-          {/*Reference: https://stackoverflow.com/questions/42573017/in-react-es6-why-does-the-input-field-lose-focus-after-typing-a-character*/}
+          {"title: '" + todoTitle + "'"}
+          {"Todo: " + this.todo.title}
             { todoTitle != "" && todoTitle != null && 
                 <TextField
                   id="title"
-                  key="createTodoTitle"
                   label="Title"
-                  defaultValue={todoTitle}
+                  defaultValue={""}
                   margin="dense"
                   onChange={this.handleTitle}
                   helperText="Add a title for your Todo item"
@@ -150,9 +168,8 @@ class TodoModal extends React.Component
                 <TextField
                   error
                   id="title"
-                  key="createTodoTitle"
                   label="Title"
-                  defaultValue={todoTitle}
+                  defaultValue={""}
                   margin="dense"
                   onChange={this.handleTitle}
                   helperText="Add a title for your Todo item"
@@ -161,25 +178,22 @@ class TodoModal extends React.Component
             }
             <TextField
               id="dueDate"
-              key="createTodoDueDate"
               label="Due date"
               type="date"
-              defaultValue={todoDueDate}
+              defaultValue={this.todo.dueDate}
               onChange={this.handleDueDate}
               margin="dense"
             />
             <TextField
               id="reminderTime"
-              key="createTodoReminderTime"
               label="Remind me"
               type="datetime"
-              defaultValue={todoReminderTime}
+              defaultValue={this.todo.reminderTime}
               onChange={this.handleReminderTime}
               margin="dense"
             />
             <TextField
               id="details"
-              key="createTodoDetails"
               label="Details"
               multiline
               rowsMax="4"
@@ -211,4 +225,4 @@ TodoModal.propTypes = {
 };
 
 
-export default withStyles(styles)(TodoModal);
+export default withStyles(styles)(TodoModalTodo);

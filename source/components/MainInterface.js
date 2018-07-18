@@ -10,6 +10,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 
+import BootstrapButton from "./bootstrap/Button";
+
 import TodoModal from "./TodoModal";
 import TodoItem from "./TodoItem";
 
@@ -43,8 +45,10 @@ class MainInterface extends React.Component
 
   toggleTodo()
   {
+    console.log("MI Todo");
+    let currentModalState = this.state.showTodoModal;
     this.setState({
-      showTodoModal: !this.state.showTodoModal
+      showTodoModal: !currentModalState,
     })
   }
 
@@ -93,7 +97,7 @@ class MainInterface extends React.Component
     {
       fs.mkdirSync(listDir);
     }
-    console.log("Location: " + listLocation)
+    console.log("Location CDU: " + listLocation)
     fs.writeFile(
       listLocation,
       JSON.stringify(this.state.todoList), "utf-8", 
@@ -106,45 +110,89 @@ class MainInterface extends React.Component
 
   render()
   {
+    console.log("Render::Main interface");
     console.log(JSON.stringify(this.state.todo));
-    const todoItems = this.state.todoList.map((step, move) =>
+    console.log("Main interface: " + this.state.showTodoModal);
+    const todoPendingItems = this.state.todoList.map((step, move) =>
     {
       const todoTitle = this.state.todoList[move].title;
       const todoDetails = this.state.todoList[move].details;
       const todoDueDate = this.state.todoList[move].dueDate;
       const todoReminderTime = this.state.todoList[move].reminderTime;
       const todoStatus = this.state.todoList[move].status;
-      return (
-        <TodoItem
-          key={move} 
-          todoTitle={todoTitle}
-          todoDetails={todoDetails}
-          todoDueDate={todoDueDate}
-          todoReminderTime={todoReminderTime}
-          todoStatus={todoStatus}
-          itemNo={move}
-          handleForDeleteItem={this.handleForDeleteItem.bind(this)}
-          handleForCompletedItem={this.handleForCompletedItem.bind(this)}
-        />
-      );
+      if ( todoStatus === "Pending" )
+      {
+        return (
+          <TodoItem
+            id={"#accordion-pending"}
+            key={move} 
+            todoTitle={todoTitle}
+            todoDetails={todoDetails}
+            todoDueDate={todoDueDate}
+            todoReminderTime={todoReminderTime}
+            todoStatus={todoStatus}
+            itemNo={move}
+            handleForDeleteItem={this.handleForDeleteItem.bind(this)}
+            handleForCompletedItem={this.handleForCompletedItem.bind(this)}
+          />
+        );
+      }
+    });
+    const todoCompletedItems = this.state.todoList.map((step, move) =>
+    {
+      const todoTitle = this.state.todoList[move].title;
+      const todoDetails = this.state.todoList[move].details;
+      const todoDueDate = this.state.todoList[move].dueDate;
+      const todoReminderTime = this.state.todoList[move].reminderTime;
+      const todoStatus = this.state.todoList[move].status;
+      if ( todoStatus === "Completed" )
+      {
+        return (
+          <TodoItem
+            id={"#accordion-completed"}
+            key={move} 
+            todoTitle={todoTitle}
+            todoDetails={todoDetails}
+            todoDueDate={todoDueDate}
+            todoReminderTime={todoReminderTime}
+            todoStatus={todoStatus}
+            itemNo={move}
+            handleForDeleteItem={this.handleForDeleteItem.bind(this)}
+            handleForCompletedItem={this.handleForCompletedItem.bind(this)}
+          />
+        );
+      }
     });
     return (
       <div className="main-interface">
-        <div className="todo-list">
-          <List>
-            {todoItems}
-          </List>
+        <div className="todo-pending-list">
+          <h4>Pending Items</h4>
+          <div id="accordion-pending">
+            {todoPendingItems}
+          </div>
         </div>
-        <Button
-          variant="fab" color="primary" 
-          aria-label="Add" 
-          style={{"position": "absolute", "right": "50px", "bottom": "50px"}}
+        <div className="todo-completed-list">
+          <h4>Completed Items</h4>
+          <div id="accordion-completed">
+            {todoCompletedItems}
+          </div>
+        </div>
+        <BootstrapButton
+          role="button"
+          dataToggle="modal"
+          dataTarget="#todoModal"
+          ariaLabel="Add"
+          type="primary"
+          outline={false}
+          size={"large"}
+          style={{"position": "absolute", "right": "25px", "bottom": "25px"}}
           onClick={this.toggleTodo.bind(this)}>
           <AddIcon />
-        </Button>
+        </BootstrapButton>
         {
           this.state.showTodoModal &&
-          <TodoModal 
+          <TodoModal
+            id={"todoModal"}
             display={this.state.showTodoModal}
             handleForTodoModal={this.handleForTodoModal.bind(this)}
             handleForTodoInfo={this.handleForTodoInfo.bind(this)}

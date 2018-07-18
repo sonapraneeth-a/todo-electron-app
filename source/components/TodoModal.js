@@ -1,35 +1,14 @@
 import React from "react";
-import PropTypes from 'prop-types';
-import moment from "moment";
-
-import { withStyles } from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import IconButton from '@material-ui/core/IconButton';
+import BootstrapButton from "./bootstrap/Button";
 import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import moment from "moment";
 
-const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit,
-    //textTransform: "none",
-  },
+const styles = {
   leftIcon: {
-    marginRight: theme.spacing.unit,
-  },
-  formContainer: {
-    display: "flex",
-    flexWrap: "wrap",
-    flexDirection: "column"
-  },
-  buttonContainer: {
-    display: "flex",
-    flexWrap: "wrap",
-    flexDirection: "row",
-    marginLeft: "auto",
+    marginRight: "20px",
   }
-});
+};
 
 class TodoModal extends React.Component
 {
@@ -45,7 +24,7 @@ class TodoModal extends React.Component
       todoStatus: "Pending",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleTitle = this.handleTitle.bind(this);
+    // this.handleTitle = this.handleTitle.bind(this);
     this.handleDetails = this.handleDetails.bind(this);
     this.handleDueDate = this.handleDueDate.bind(this);
     this.handleReminderTime = this.handleReminderTime.bind(this);
@@ -76,7 +55,8 @@ class TodoModal extends React.Component
 
   handleTitle(event)
   {
-    event.preventDefault();
+    //event.preventDefault();
+    console.log("Title Modal: " + event.target.value);
     this.setState({
       todoTitle: event.target.value,
     });
@@ -108,107 +88,98 @@ class TodoModal extends React.Component
 
   render()
   {
-    const { classes } = this.props;
     const todoTitle = this.state.todoTitle;
     const todoDetails = this.state.todoDetails;
     const todoDueDate = this.state.todoDueDate;
     const todoReminderTime = this.state.todoReminderTime;
+    console.log("Render TodoModal: " + todoDueDate);
     return (
-      <Modal
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-        open={this.state.open}
-        onClose={this.toggleModal.bind(this)}
-      >
-        <div className="modal-content">
-          <IconButton 
-            style={{"position": "absolute", "top": "10px", "right": "10px"}}
-            aria-label="Close Modal"
-            onClick={this.toggleModal.bind(this)}>
-            <CloseIcon />
-          </IconButton>
-          <h3>Create Todo</h3>
-          <form
-            onSubmit={this.handleSubmit}
-            className={classes.formContainer}
-            noValidate autoComplete="on"
-          >
-          {/*Reference: https://stackoverflow.com/questions/42573017/in-react-es6-why-does-the-input-field-lose-focus-after-typing-a-character*/}
-            { todoTitle != "" && todoTitle != null && 
-                <TextField
-                  id="title"
-                  key="createTodoTitle"
-                  label="Title"
-                  defaultValue={todoTitle}
-                  margin="dense"
-                  onChange={this.handleTitle}
-                  helperText="Add a title for your Todo item"
-                  placeholder={"Title for the TODO"}
-                />
-            }
-            { (todoTitle == "" || todoTitle == null) && 
-                <TextField
-                  error
-                  id="title"
-                  key="createTodoTitle"
-                  label="Title"
-                  defaultValue={todoTitle}
-                  margin="dense"
-                  onChange={this.handleTitle}
-                  helperText="Add a title for your Todo item"
-                  placeholder={"Title for the TODO"}
-                />
-            }
-            <TextField
-              id="dueDate"
-              key="createTodoDueDate"
-              label="Due date"
-              type="date"
-              defaultValue={todoDueDate}
-              onChange={this.handleDueDate}
-              margin="dense"
-            />
-            <TextField
-              id="reminderTime"
-              key="createTodoReminderTime"
-              label="Remind me"
-              type="datetime"
-              defaultValue={todoReminderTime}
-              onChange={this.handleReminderTime}
-              margin="dense"
-            />
-            <TextField
-              id="details"
-              key="createTodoDetails"
-              label="Details"
-              multiline
-              rowsMax="4"
-              defaultValue={""}
-              onChange={this.handleDetails}
-              margin="dense"
-              helperText="Add a description for your Todo item"
-              placeholder={"Details about the TODO"}
-            />
-            <div className={classes.buttonContainer}>
-              <Button type="submit" variant="contained" size="small" color="primary" className={classes.button}>
-                <SaveIcon className={classes.leftIcon} />
-                Save
-              </Button>
-              <Button variant="contained" size="small" color="secondary" className={classes.button} onClick={this.toggleModal.bind(this)}>
-                <CloseIcon className={classes.leftIcon} />
-                Cancel
-              </Button>
+      <div className="modal fade" id={this.props.id} tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered" role="document" style={{maxWidth: "100%"}}>
+          <div className="modal-content" style={{padding: "0"}}>
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">Create Todo</h5>
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-          </form>
+            <div className="modal-body">
+              <form
+                onSubmit={this.handleSubmit}
+              >
+              { todoTitle != "" && todoTitle != null && 
+                <div className="input-group" style={{margin: "10px auto"}}>
+                  <div className="input-group-prepend">
+                    <label className="input-group-text" style={{width: "150px"}} htmlFor="inputGroupSelect01">Title</label>
+                  </div>
+                  <input key="createTodoTitle" type="text" className="form-control is-valid" placeholder={"Title for the TODO"} aria-label="TodoTitle" aria-describedby="basic-addon1" onChange={this.handleTitle}/>
+                </div>
+              }
+              { (todoTitle == "" || todoTitle == null) && 
+                <div className="input-group" style={{margin: "10px auto"}}>
+                  <div className="input-group-prepend">
+                    <label className="input-group-text" style={{width: "150px"}} htmlFor="inputGroupSelect01">Title</label>
+                  </div>
+                  <input key="createTodoTitle" type="text" className="form-control is-invalid" placeholder={"Title for the TODO"} aria-label="TodoTitle" aria-describedby="basic-addon1" onChange={this.handleTitle.bind(this)}/>
+                </div>
+              }
+                <div className="input-group" style={{margin: "10px auto"}}>
+                  <div className="input-group-prepend">
+                    <label className="input-group-text" style={{width: "150px"}} htmlFor="inputGroupSelect02">Due Date</label>
+                  </div>
+                  <input key="createDueDate" type="date" className="form-control is-valid" defaultValue={todoDueDate} aria-label="TodoDueDate" aria-describedby="basic-addon2" onChange={this.handleDueDate}/>
+                </div>
+                <div className="input-group" style={{margin: "10px auto"}}>
+                  <div className="input-group-prepend">
+                    <label className="input-group-text" style={{width: "150px"}} htmlFor="inputGroupSelect03">Reminder time</label>
+                  </div>
+                  <input key="createReminderTime" type="datetime" className="form-control is-valid" defaultValue={todoReminderTime} aria-label="TodoReminderTime" aria-describedby="basic-addon3" onChange={this.handleRemiderTime}/>
+                </div>
+                <div className="input-group" style={{margin: "10px auto"}}>
+                  <div className="input-group-prepend">
+                    <label className="input-group-text" style={{width: "150px"}} htmlFor="inputGroupSelect04">Details</label>
+                  </div>
+                  <textarea key="createTodoDetails" type="text" rows="4" className="form-control is-valid" placeholder={"Details for the TODO"} aria-label="TodoDetails" aria-describedby="basic-addon4" onChange={this.handleDetails}/>
+                </div>
+                <div className="modal-footer" style={{borderTop: "1px solid white"}}>
+                  <BootstrapButton
+                    role="submit"
+                    type="primary"
+                    outline={false}
+                  >
+                    <SaveIcon className={"left-icon"} />
+                    Save
+                  </BootstrapButton>
+                  <BootstrapButton
+                    role="button"
+                    type="danger"
+                    outline={false}
+                    onClick={this.toggleModal.bind(this)}
+                    dataDismiss="modal"
+                  >
+                    <CloseIcon className={"left-icon"} />
+                    Cancel
+                  </BootstrapButton>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-      </Modal>
+      </div>
     );
   }
 }
 
-TodoModal.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+export default TodoModal;
 
-
-export default withStyles(styles)(TodoModal);
+{/*<BootstrapButton
+                role="button"
+                aria-label="Add"
+                type="primary"
+                outline={false}
+                size={"large"}
+                style={{"position": "absolute", "right": "25px", "bottom": "25px"}}
+                onClick={this.toggleModal.bind(this)}>
+                <CloseIcon />
+                Cancel
+              </BootstrapButton>*/}

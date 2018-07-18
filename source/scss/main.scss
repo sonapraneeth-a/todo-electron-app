@@ -1,7 +1,18 @@
+@import "plugins/bootstrap";
 @import "base";
 @import "modal";
 
 p 
 {
   color: green;
+}
+
+.strike-out
+{
+  text-decoration: line-through;
+}
+
+.left-icon
+{
+  margin-right: 10px;
 }

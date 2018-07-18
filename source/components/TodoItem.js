@@ -50,6 +50,7 @@ class TodoItem extends React.Component
     const dispTimeString = dispTime.format('DD MMMM YYYY HH:mm A');
     const checkboxValue = (this.props.todoStatus === "Pending" ? false : true);
     const itemCheckout = (checkboxValue === true ? "strike-out": "");
+    const todoDetails = this.props.todoDetails.replace(/\n/g,"<br/>");
     /*const collapseClass = (this.props.itemNo === 0 ? "show": "");
     console.log(this.props.todoStatus);
     console.log(this.props.itemNo);*/
@@ -81,7 +82,7 @@ class TodoItem extends React.Component
             className={"collapse"}
             data-parent={this.props.id}>
             <div className="card-body">
-              {this.props.todoDetails}
+              <p dangerouslySetInnerHTML={{__html: todoDetails}}/>
             </div>
           </div>
         </div>

@@ -64,6 +64,11 @@ class TodoItem extends React.Component
     const itemCheckout = (checkboxValue === true ? "strike-out": "");
     const todoDetails = this.props.todoDetails.replace(/\n/g,"<br/>");
     const todoPriority = this.props.todoPriority;
+    let todoPriorityClass = "";
+    if(todoPriority === "Low") todoPriorityClass = "primary";
+    if(todoPriority === "Normal") todoPriorityClass = "dark";
+    if(todoPriority === "Important") todoPriorityClass = "warning";
+    if(todoPriority === "Critical") todoPriorityClass = "danger";
     /*const collapseClass = (this.props.itemNo === 0 ? "show": "");
     console.log(this.props.todoStatus);
     console.log(this.props.itemNo);*/
@@ -83,18 +88,34 @@ class TodoItem extends React.Component
           }
         </IconBox>
         <div className="card" style={{width: "100%", borderRadius: "0"}}>
+          { this.props.todoStatus === "Pending" && 
           <a 
             className="card-header card-link"
             data-toggle="collapse"
             href={"#collapse"+this.props.todoStatus+this.props.itemNo} style={{display: "block"}}>
             <div style={{display: "flex", flexDirection: "row", alignSelf: "align-end"}}>
-              <p className="text-primary" style={{margin: "auto 10px", width: "90%", flexWrap: "wrap"}}>{this.props.todoTitle}</p>
-              <div style={{justifyContent: "flex-end", display: "flex", flexWrap: "wrap"}}>
-                <p className="text-warning" style={{margin: "auto 10px"}}>{todoPriority}</p>
+              <p className="text-info" style={{margin: "auto 10px", width: "90%", flexWrap: "wrap"}}>{this.props.todoTitle}</p>
+              <div style={{justifyContent: "flex-end", width: "10%", marginRight: "10px", display: "flex", flexWrap: "wrap"}}>
+                <p className={"text-"+todoPriorityClass} style={{margin: "auto 10px"}}>{todoPriority}</p>
               </div>
               <DownArrowIcon style={{position: "absolute", right: "10px"}}/>
             </div>
           </a>
+          }
+          { this.props.todoStatus === "Completed" && 
+          <a 
+            className="card-header card-link"
+            data-toggle="collapse"
+            href={"#collapse"+this.props.todoStatus+this.props.itemNo} style={{display: "block", textDecoration: "line-through"}}>
+            <div style={{display: "flex", flexDirection: "row", alignSelf: "align-end"}}>
+              <p className="text-info" style={{margin: "auto 10px", width: "90%", flexWrap: "wrap"}}>{this.props.todoTitle}</p>
+              <div style={{justifyContent: "flex-end", width: "10%", marginRight: "10px", display: "flex", flexWrap: "wrap"}}>
+                <p className={"text-"+todoPriorityClass} style={{margin: "auto 10px"}}>{todoPriority}</p>
+              </div>
+              <DownArrowIcon style={{position: "absolute", right: "10px"}}/>
+            </div>
+          </a>
+          }
           <div
             id={"collapse"+this.props.todoStatus+this.props.itemNo}
             className={"collapse"}

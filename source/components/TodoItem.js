@@ -9,8 +9,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DownArrowIcon from '@material-ui/icons/KeyboardArrowDown';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import DoneIcon from '@material-ui/icons/Done';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import StarIcon from '@material-ui/icons/Star';
+import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 // import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import red from '@material-ui/core/colors/red';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -48,6 +51,7 @@ class TodoItem extends React.Component
     const dispDate = moment(this.props.todoDueDate, 'YYYY-MM-DD');
     const dispDateString = dispDate.format('DD MMMM YYYY');
     const dispTime = moment(this.props.todoReminderTime, 'YYYY-MM-DD HH:mm A');
+    console.log("Disptime: " + dispTime);
     const dispTimeString = dispTime.format('DD MMMM YYYY HH:mm A');
     const checkboxValue = (this.props.todoStatus === "Pending" ? false : true);
     const itemCheckout = (checkboxValue === true ? "strike-out": "");
@@ -60,7 +64,7 @@ class TodoItem extends React.Component
       <div style={{display: "flex", margin: "10px auto"}}>
         <IconBox>
           { this.props.todoStatus === "Pending" && 
-            <DoneIcon 
+            <RadioButtonUncheckedIcon 
               onClick={this.completedItem.bind(this)}
             />
           }
@@ -84,6 +88,9 @@ class TodoItem extends React.Component
             data-parent={this.props.id}>
             <div className="card-body">
               <p dangerouslySetInnerHTML={{__html: marked(this.props.todoDetails)}}/>
+              <p>
+                <span><AccessAlarmIcon /> {dispTimeString}</span>
+              </p>
             </div>
           </div>
         </div>
@@ -92,6 +99,12 @@ class TodoItem extends React.Component
             color="error"
             onClick={this.deleteItem.bind(this)}/>
         </IconBox>
+        { this.props.todoStatus === "Pending" &&
+          <IconBox style={{color: "#ffc107"}}>
+            <StarIcon 
+              />
+          </IconBox>
+        }
       </div>
     );
   }

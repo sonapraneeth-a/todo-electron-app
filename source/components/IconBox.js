@@ -30,7 +30,7 @@ class IconBox extends React.Component
   {
     return (
       <div style={{display: "flex", position: "relative", flexWrap: "wrap", alignItems: "stretch", width: "50px", cursor: "pointer"}}>
-        <div style={styles.iconBox}>
+        <div style={Object.assign({}, styles.iconBox, this.props.style)}>
           {this.props.children}
         </div>
       </div>

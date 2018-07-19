@@ -35,7 +35,7 @@ class TodoModal extends React.Component
     this.handleReminderTime = this.handleReminderTime.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.handleImportant = this.handleImportant.bind(this);
-    this.handlePriority = this.handlePriority.bind(this);
+    // this.handleClickPriority = this.handleClickPriority.bind(this, value);
   }
 
   toggleModal()
@@ -112,11 +112,12 @@ class TodoModal extends React.Component
     });
   }
 
-  handlePriority(event)
+  handleClickPriority(value)
   {
-    event.preventDefault();
+    console.log("Priority");
+    console.log(value);
     this.setState({
-      todoPriority: event.target.value,
+      todoPriority: value,
     });
   }
 
@@ -127,12 +128,13 @@ class TodoModal extends React.Component
     const todoDueDate = this.state.todoDueDate;
     const todoReminderTime = this.state.todoReminderTime;
     const todoImportant = this.state.todoImportant;
+    const todoPriority = this.state.todoPriority;
     const openStatus = this.props.display;
     console.log("Render TestModal: " + todoDueDate);
     console.log(this.state.open);
     return (
       <Modal isOpen={openStatus} toggle={this.toggleModal} centered style={{maxWidth: "100%", padding: "0"}}>
-          <ModalHeader toggle={this.toggleModal}>Modal title</ModalHeader>
+          <ModalHeader toggle={this.toggleModal}>Create a TODO</ModalHeader>
           <ModalBody>
             <form
               onSubmit={this.handleSubmit}
@@ -166,7 +168,7 @@ class TodoModal extends React.Component
                 <input key="createReminderTime" type="datetime" className="form-control is-valid" defaultValue={todoReminderTime} aria-label="TodoReminderTime" aria-describedby="basic-addon3" onChange={this.handleRemiderTime}/>
               </div>
               <div className="input-group" key="createImportantDiv1" style={{margin: "10px auto"}}>
-                  <label className="input-group-text" key="createImportantDiv3" style={{width: "150px"}} htmlFor="inputGroupSelect04">Is Important?</label>
+                  <label className="input-group-text" key="createImportantDiv3" style={{width: "150px"}} htmlFor="inputGroupSelect05">Is Important?</label>
                 <div className="input-group-append">
                   <div className="input-group-text">
                   { todoImportant === true &&
@@ -176,6 +178,51 @@ class TodoModal extends React.Component
                     <input type="checkbox" aria-label="Checkbox for following text input" onChange={this.handleImportant}/>
                   }
                   </div>
+                </div>
+              </div>
+              <div className="input-group" key="createPriorityDiv1" style={{margin: "10px auto"}}>
+                <label className="input-group-text" key="createPriorityDiv3" style={{width: "150px"}} htmlFor="inputGroupSelect06">Priority</label>
+                <div className="button-group" style={{margin: "auto 10px"}}>
+                  <BootstrapButton
+                    role="button"
+                    size="small"
+                    type="primary"
+                    outline={todoPriority === "Low" ? false : true}
+                    style={{margin: "auto 5px"}}
+                    onClick={this.handleClickPriority.bind(this, "Low")}
+                  >
+                    Low
+                  </BootstrapButton>
+                  <BootstrapButton
+                    role="button"
+                    size="small"
+                    type="dark"
+                    outline={todoPriority === "Normal" ? false : true}
+                    style={{margin: "auto 5px"}}
+                    onClick={this.handleClickPriority.bind(this, "Normal")}
+                  >
+                    Normal
+                  </BootstrapButton>
+                  <BootstrapButton
+                    role="button"
+                    size="small"
+                    type="warning"
+                    outline={todoPriority === "Important" ? false : true}
+                    style={{margin: "auto 5px"}}
+                    onClick={this.handleClickPriority.bind(this, "Important")}
+                  >
+                    Important
+                  </BootstrapButton>
+                  <BootstrapButton
+                    role="button"
+                    size="small"
+                    type="danger"
+                    outline={todoPriority === "Critical" ? false : true}
+                    style={{margin: "auto 5px"}}
+                    onClick={this.handleClickPriority.bind(this, "Critical")}
+                  >
+                    Critical
+                  </BootstrapButton>
                 </div>
               </div>
               <div className="input-group" key="createDetailsDiv1" style={{margin: "10px auto"}}>
@@ -211,4 +258,12 @@ class TodoModal extends React.Component
 }
 
 export default TodoModal;
+
+{/*<div className="input-group-append">
+                <select className="custom-select" value={todoPriority} onChange={this.handlePriority}>
+                  <option value="normal">Normal</option>
+                  <option value="urgent">Urgent</option>
+                  <option value="critical">Critical</option>
+                </select>
+                </div>*/}
 

@@ -55,10 +55,12 @@ class BootstrapButton extends React.Component
       this.buttonSizes.indexOf(this.props.size) !== -1)
     {
       className += (" btn-"+this.buttonClassSizes[this.buttonSizes.indexOf(this.props.size)]);
-      if (this.props.size === "large")
+      if (this.props.size === "large" && this.props.variant === "fab")
         buttonStyle = Object.assign({}, styles.fabLarge, this.props.style);
-      if (this.props.size === "small")
+      else if (this.props.size === "small" && this.props.variant === "fab")
         buttonStyle = Object.assign({}, styles.fabSmall, this.props.style);
+      else if (this.props.size === "small")
+        buttonStyle = Object.assign({}, this.props.style);
     }
     return (
       <button

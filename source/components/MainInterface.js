@@ -189,6 +189,7 @@ class MainInterface extends React.Component
           dataTarget="#todoModal"
           ariaLabel="Add"
           type="primary"
+          variant="fab"
           outline={false}
           size={"large"}
           style={{"position": "absolute", "right": "25px", "bottom": "25px"}}

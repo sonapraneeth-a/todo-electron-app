@@ -20,6 +20,7 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import BootstrapButton from "./bootstrap/Button";
 
 import IconBox from "./IconBox";
 import { Icon } from "../../node_modules/@material-ui/core";
@@ -56,6 +57,7 @@ class TodoItem extends React.Component
     const checkboxValue = (this.props.todoStatus === "Pending" ? false : true);
     const itemCheckout = (checkboxValue === true ? "strike-out": "");
     const todoDetails = this.props.todoDetails.replace(/\n/g,"<br/>");
+    const todoPriority = this.props.todoPriority;
     /*const collapseClass = (this.props.itemNo === 0 ? "show": "");
     console.log(this.props.todoStatus);
     console.log(this.props.itemNo);*/
@@ -79,8 +81,13 @@ class TodoItem extends React.Component
             className="card-header card-link"
             data-toggle="collapse"
             href={"#collapse"+this.props.todoStatus+this.props.itemNo} style={{display: "block"}}>
-            {this.props.todoTitle}
-            <DownArrowIcon style={{position: "absolute", right: "10px"}}/>
+            <div style={{display: "flex", flexDirection: "row", alignSelf: "align-end"}}>
+              <p className="text-primary" style={{margin: "auto 10px"}}>{this.props.todoTitle}</p>
+              <div style={{justifyContent: "flex-end", display: "flex", width: "90%"}}>
+                <p className="text-warning" style={{margin: "auto 10px"}}>{todoPriority}</p>
+              </div>
+              <DownArrowIcon style={{position: "absolute", right: "10px"}}/>
+            </div>
           </a>
           <div
             id={"collapse"+this.props.todoStatus+this.props.itemNo}
@@ -100,8 +107,8 @@ class TodoItem extends React.Component
             onClick={this.deleteItem.bind(this)}/>
         </IconBox>
         { this.props.todoStatus === "Pending" && this.props.todoImportant === true && 
-          <IconBox style={{color: "#ffc107"}}>
-            <StarIcon 
+          <IconBox>
+            <StarIcon style={{color: "#ffc107"}}
               />
           </IconBox>
         }

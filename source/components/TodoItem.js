@@ -99,8 +99,14 @@ class TodoItem extends React.Component
             color="error"
             onClick={this.deleteItem.bind(this)}/>
         </IconBox>
-        { this.props.todoStatus === "Pending" &&
+        { this.props.todoStatus === "Pending" && this.props.todoImportant === true && 
           <IconBox style={{color: "#ffc107"}}>
+            <StarIcon 
+              />
+          </IconBox>
+        }
+        { this.props.todoStatus === "Pending" && this.props.todoImportant === false && 
+          <IconBox>
             <StarIcon 
               />
           </IconBox>

@@ -37,10 +37,6 @@ class MainInterface extends React.Component
     this.state = {
       showTodoModal: false,
       todoList: loadTodoList,
-      todo: {
-        title: "title4",
-        desc: "desc4",
-      }
     }
   }
 
@@ -122,6 +118,8 @@ class MainInterface extends React.Component
       const todoDueDate = this.state.todoList[move].dueDate;
       const todoReminderTime = this.state.todoList[move].reminderTime;
       const todoStatus = this.state.todoList[move].status;
+      const todoImportant = this.state.todoList[move].important;
+      const todoPriority = this.state.todoList[move].priority;
       if ( todoStatus === "Pending" )
       {
         return (
@@ -133,6 +131,8 @@ class MainInterface extends React.Component
             todoDueDate={todoDueDate}
             todoReminderTime={todoReminderTime}
             todoStatus={todoStatus}
+            todoImportant={todoImportant}
+            todoPriority={todoPriority}
             itemNo={move}
             handleForDeleteItem={this.handleForDeleteItem.bind(this)}
             handleForCompletedItem={this.handleForCompletedItem.bind(this)}
@@ -147,6 +147,8 @@ class MainInterface extends React.Component
       const todoDueDate = this.state.todoList[move].dueDate;
       const todoReminderTime = this.state.todoList[move].reminderTime;
       const todoStatus = this.state.todoList[move].status;
+      const todoImportant = this.state.todoList[move].important;
+      const todoPriority = this.state.todoList[move].priority;
       if ( todoStatus === "Completed" )
       {
         return (
@@ -158,6 +160,8 @@ class MainInterface extends React.Component
             todoDueDate={todoDueDate}
             todoReminderTime={todoReminderTime}
             todoStatus={todoStatus}
+            todoImportant={todoImportant}
+            todoPriority={todoPriority}
             itemNo={move}
             handleForDeleteItem={this.handleForDeleteItem.bind(this)}
             handleForCompletedItem={this.handleForCompletedItem.bind(this)}

@@ -25,6 +25,8 @@ class TodoModal extends React.Component
       todoDueDate: moment().format("YYYY-MM-DD"),
       todoReminderTime: moment().format("YYYY-MM-DD HH:mm A"),
       todoStatus: "Pending",
+      todoImportant: false,
+      todoPriority: "Normal",
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleTitle = this.handleTitle.bind(this);
@@ -32,6 +34,8 @@ class TodoModal extends React.Component
     this.handleDueDate = this.handleDueDate.bind(this);
     this.handleReminderTime = this.handleReminderTime.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.handleImportant = this.handleImportant.bind(this);
+    this.handlePriority = this.handlePriority.bind(this);
   }
 
   toggleModal()
@@ -53,7 +57,9 @@ class TodoModal extends React.Component
       details: this.state.todoDetails,
       dueDate: this.state.todoDueDate,
       reminderTime: this.state.todoReminderTime,
-      status: this.state.todoStatus
+      status: this.state.todoStatus,
+      important: this.state.todoImportant,
+      priority: this.state.todoPriority,
     }
     this.toggleModal();
     this.props.handleForTodoInfo(todo_info);
@@ -94,12 +100,33 @@ class TodoModal extends React.Component
     });
   }
 
+  handleImportant(event)
+  {
+    console.log("Important");
+    console.log("Todo: " + this.state.todoImportant);
+    console.log("Value: " + event.target.value);
+    console.log("Value: " + event.target.checked);
+    event.preventDefault();
+    this.setState({
+      todoImportant: event.target.checked,
+    });
+  }
+
+  handlePriority(event)
+  {
+    event.preventDefault();
+    this.setState({
+      todoPriority: event.target.value,
+    });
+  }
+
   render()
   {
     const todoTitle = this.state.todoTitle;
     const todoDetails = this.state.todoDetails;
     const todoDueDate = this.state.todoDueDate;
     const todoReminderTime = this.state.todoReminderTime;
+    const todoImportant = this.state.todoImportant;
     const openStatus = this.props.display;
     console.log("Render TestModal: " + todoDueDate);
     console.log(this.state.open);
@@ -137,6 +164,19 @@ class TodoModal extends React.Component
                   <label className="input-group-text" key="createReminderDateDiv3" style={{width: "150px"}} htmlFor="inputGroupSelect03">Reminder time</label>
                 </div>
                 <input key="createReminderTime" type="datetime" className="form-control is-valid" defaultValue={todoReminderTime} aria-label="TodoReminderTime" aria-describedby="basic-addon3" onChange={this.handleRemiderTime}/>
+              </div>
+              <div className="input-group" key="createImportantDiv1" style={{margin: "10px auto"}}>
+                  <label className="input-group-text" key="createImportantDiv3" style={{width: "150px"}} htmlFor="inputGroupSelect04">Is Important?</label>
+                <div className="input-group-append">
+                  <div className="input-group-text">
+                  { todoImportant === true &&
+                    <input type="checkbox" aria-label="Checkbox for following text input" checked onChange={this.handleImportant}/>
+                  }
+                  { todoImportant === false &&
+                    <input type="checkbox" aria-label="Checkbox for following text input" onChange={this.handleImportant}/>
+                  }
+                  </div>
+                </div>
               </div>
               <div className="input-group" key="createDetailsDiv1" style={{margin: "10px auto"}}>
                 <div className="input-group-prepend" key="createDetailsDiv2">

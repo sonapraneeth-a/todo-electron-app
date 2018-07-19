@@ -46,6 +46,12 @@ class TodoItem extends React.Component
     this.props.handleForCompletedItem(this.props.itemNo);
   }
 
+  importantItem()
+  {
+    console.log("Important item");
+    this.props.handleForImportantItem(this.props.itemNo);
+  }
+
   render()
   {
     const { classNamees } = this.props;
@@ -82,8 +88,8 @@ class TodoItem extends React.Component
             data-toggle="collapse"
             href={"#collapse"+this.props.todoStatus+this.props.itemNo} style={{display: "block"}}>
             <div style={{display: "flex", flexDirection: "row", alignSelf: "align-end"}}>
-              <p className="text-primary" style={{margin: "auto 10px"}}>{this.props.todoTitle}</p>
-              <div style={{justifyContent: "flex-end", display: "flex", width: "90%"}}>
+              <p className="text-primary" style={{margin: "auto 10px", width: "90%", flexWrap: "wrap"}}>{this.props.todoTitle}</p>
+              <div style={{justifyContent: "flex-end", display: "flex", flexWrap: "wrap"}}>
                 <p className="text-warning" style={{margin: "auto 10px"}}>{todoPriority}</p>
               </div>
               <DownArrowIcon style={{position: "absolute", right: "10px"}}/>
@@ -109,13 +115,13 @@ class TodoItem extends React.Component
         { this.props.todoStatus === "Pending" && this.props.todoImportant === true && 
           <IconBox>
             <StarIcon style={{color: "#ffc107"}}
-              />
+              onClick={this.importantItem.bind(this)}/>
           </IconBox>
         }
         { this.props.todoStatus === "Pending" && this.props.todoImportant === false && 
           <IconBox>
             <StarIcon 
-              />
+              onClick={this.importantItem.bind(this)}/>
           </IconBox>
         }
       </div>

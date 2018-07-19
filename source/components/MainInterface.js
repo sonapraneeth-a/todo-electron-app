@@ -8,6 +8,17 @@ import BootstrapButton from "./bootstrap/Button";
 
 import TodoModal from "./TodoModal";
 import TodoItem from "./TodoItem";
+import Navbar from "./Navbar";
+import Sidebar from "./Sidebar";
+
+const styles = {
+  contentPart: {
+    width: "80%",
+  },
+  contentFull: {
+    width: "100%",
+  }
+};
 
 class MainInterface extends React.Component
 {
@@ -22,6 +33,7 @@ class MainInterface extends React.Component
     }
     this.state = {
       showTodoModal: false,
+      showSidebar: true,
       todoList: loadTodoList,
     }
   }
@@ -31,6 +43,14 @@ class MainInterface extends React.Component
     let currentModalState = this.state.showTodoModal;
     this.setState({
       showTodoModal: !currentModalState,
+    });
+  }
+
+  toggleSidebar()
+  {
+    let currentSidebarState = this.state.showSidebar;
+    this.setState({
+      showSidebar: !currentSidebarState,
     });
   }
 
@@ -96,6 +116,11 @@ class MainInterface extends React.Component
 
   render()
   {
+    let contentWidth;
+    if (this.state.showSidebar === true)
+      contentWidth = Object.assign({}, styles.contentPart);
+    else
+      contentWidth = Object.assign({}, styles.contentFull);
     const todoPendingItems = this.state.todoList.map((step, move) =>
     {
       const todoTitle = this.state.todoList[move].title;
@@ -156,41 +181,47 @@ class MainInterface extends React.Component
       }
     });
     return (
-      <div className="main-interface">
-        <div className="todo-pending-list">
-          <h4>Pending Items</h4>
-          <div id="accordion-pending">
-            {todoPendingItems}
+      <div style={{display: "flex", flexDirection: "column"}}>
+        <Navbar onClick={this.toggleSidebar.bind(this)}/>
+        <div className="main-interface">
+          <Sidebar show={this.state.showSidebar}/>
+          <div id="content" style={contentWidth}>
+            <div className="todo-pending-list">
+              <h4>Pending Items</h4>
+              <div id="accordion-pending">
+                {todoPendingItems}
+              </div>
+            </div>
+            <div className="todo-completed-list">
+              <h4>Completed Items</h4>
+              <div id="accordion-completed">
+                {todoCompletedItems}
+              </div>
+            </div>
+            <BootstrapButton
+              role="button"
+              dataToggle="modal"
+              dataTarget="#todoModal"
+              ariaLabel="Add"
+              type="primary"
+              variant="fab"
+              outline={false}
+              size={"large"}
+              style={{"position": "fixed", "right": "30px", "bottom": "30px"}}
+              onClick={this.toggleTodo.bind(this)}>
+              <AddIcon />
+            </BootstrapButton>
+            { this.state.showTodoModal && 
+              <TodoModal
+                id={"todoModal"}
+                display={this.state.showTodoModal}
+                handleForTodoModal={this.handleForTodoModal.bind(this)}
+                handleForTodoInfo={this.handleForTodoInfo.bind(this)}
+                onClick={this.toggleTodo.bind(this)}
+              />
+            }
           </div>
         </div>
-        <div className="todo-completed-list">
-          <h4>Completed Items</h4>
-          <div id="accordion-completed">
-            {todoCompletedItems}
-          </div>
-        </div>
-        <BootstrapButton
-          role="button"
-          dataToggle="modal"
-          dataTarget="#todoModal"
-          ariaLabel="Add"
-          type="primary"
-          variant="fab"
-          outline={false}
-          size={"large"}
-          style={{"position": "absolute", "right": "25px", "bottom": "25px"}}
-          onClick={this.toggleTodo.bind(this)}>
-          <AddIcon />
-        </BootstrapButton>
-        { this.state.showTodoModal && 
-          <TodoModal
-            id={"todoModal"}
-            display={this.state.showTodoModal}
-            handleForTodoModal={this.handleForTodoModal.bind(this)}
-            handleForTodoInfo={this.handleForTodoInfo.bind(this)}
-            onClick={this.toggleTodo.bind(this)}
-          />
-        }
       </div>
     );
   }

@@ -7,7 +7,7 @@ import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from "reactstrap";
 
 const styles = {
   leftIcon: {
-    marginRight: "20px",
+    marginRight: "10px",
   }
 };
 
@@ -221,7 +221,7 @@ class TodoModal extends React.Component
                   type="primary"
                   outline={false}
                 >
-                  <SaveIcon className={"left-icon"} />
+                  <SaveIcon style={styles.leftIcon} />
                   Save
                 </BootstrapButton>
                 <BootstrapButton
@@ -230,7 +230,7 @@ class TodoModal extends React.Component
                   outline={false}
                   onClick={this.toggleModal}
                 >
-                  <CloseIcon className={"left-icon"} />
+                  <CloseIcon style={styles.leftIcon} />
                   Cancel
                 </BootstrapButton>
               </ModalFooter>

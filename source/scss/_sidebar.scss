@@ -1,0 +1,99 @@
+.main-interface
+{
+  display: flex;
+  width: 100%;
+  margin-top: 3.5rem;
+}
+
+#sidebar
+{
+  position: fixed;
+  height: 100vh;
+  width: 20%;
+  z-index: 999;
+  /* don't forget to add all the previously mentioned styles here too */
+  background: black;
+  color: #fff;
+  transition: all 0.3s;
+  &.active
+  {
+    margin-left: -250px;
+  }
+  .sidebar-header
+  {
+    padding: 20px;
+    background: black;
+  }
+  ul.components
+  {
+    padding: 20px 0;
+    border-bottom: 1px solid #47748b;
+  }
+  ul li a
+  {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+    color: white;
+  }
+  ul p
+  {
+    color: #fff;
+    padding: 10px;
+  }
+  ul li a:hover
+  {
+    color: #7386D5;
+    background: #fff;
+  }
+}
+
+#content
+{
+  margin: 3.5rem 1rem;
+  width: 80%;
+  padding: 40px;
+  min-height: 100vh;
+  transition: all 0.3s;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+a[data-toggle="collapse"]
+{
+  position: relative;
+}
+
+.dropdown-toggle::after
+{
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 768px)
+{
+  #sidebar
+  {
+    margin-left: -250px;
+  }
+  #sidebar.active
+  {
+    margin-left: 0;
+  }
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"]
+{
+  color: #fff;
+  background: #6d7fcc;
+}
+ul ul a
+{
+  font-size: 0.9em !important;
+  padding-left: 30px !important;
+  background: #6d7fcc;
+}

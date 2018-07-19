@@ -1,6 +1,8 @@
 @import "plugins/bootstrap";
+@import "plugins/bootstrap-overrides";
 @import "base";
 @import "modal";
+@import "sidebar";
 
 p 
 {
@@ -14,11 +16,6 @@ p
 .strike-out
 {
   text-decoration: line-through;
-}
-
-.left-icon
-{
-  margin-right: 10px;
 }
 
 .modal-content

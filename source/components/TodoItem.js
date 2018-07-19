@@ -1,29 +1,15 @@
 import React from "react";
-import PropTypes from 'prop-types';
 import moment from "moment";
 import marked from "marked";
 
-import { withStyles } from '@material-ui/core/styles';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Checkbox from '@material-ui/core/Checkbox';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DownArrowIcon from '@material-ui/icons/KeyboardArrowDown';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
-import DoneIcon from '@material-ui/icons/Done';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import StarIcon from '@material-ui/icons/Star';
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
-// import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import red from '@material-ui/core/colors/red';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import BootstrapButton from "./bootstrap/Button";
 
 import IconBox from "./IconBox";
-import { Icon } from "../../node_modules/@material-ui/core";
 
 const styles = theme => ({
   timeItem: {
@@ -48,17 +34,14 @@ class TodoItem extends React.Component
 
   importantItem()
   {
-    console.log("Important item");
     this.props.handleForImportantItem(this.props.itemNo);
   }
 
   render()
   {
-    const { classNamees } = this.props;
     const dispDate = moment(this.props.todoDueDate, 'YYYY-MM-DD');
     const dispDateString = dispDate.format('DD MMMM YYYY');
     const dispTime = moment(this.props.todoReminderTime, 'YYYY-MM-DD HH:mm A');
-    console.log("Disptime: " + dispTime);
     const dispTimeString = dispTime.format('DD MMMM YYYY HH:mm A');
     const checkboxValue = (this.props.todoStatus === "Pending" ? false : true);
     const itemCheckout = (checkboxValue === true ? "strike-out": "");
@@ -69,9 +52,6 @@ class TodoItem extends React.Component
     if(todoPriority === "Normal") todoPriorityClass = "dark";
     if(todoPriority === "Important") todoPriorityClass = "warning";
     if(todoPriority === "Critical") todoPriorityClass = "danger";
-    /*const collapseClass = (this.props.itemNo === 0 ? "show": "");
-    console.log(this.props.todoStatus);
-    console.log(this.props.itemNo);*/
     // Reference: https://www.w3schools.com/bootstrap4/bootstrap_collapse.asp
     return (
       <div style={{display: "flex", margin: "10px auto"}}>
@@ -149,59 +129,5 @@ class TodoItem extends React.Component
     );
   }
 }
-
-{/*<div style={{width: "100%"}}>
-        <ExpansionPanel key={this.props.itemNo} style={{display: "flex"}} classNameName={itemCheckout}>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Checkbox
-            checked={checkboxValue}
-            tabIndex={-1}
-            disableRipple
-            onClick={this.completedItem.bind(this)}
-          />
-          <DeleteIcon
-            color="error"
-            onClick={this.deleteItem.bind(this)}/>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-              sit amet blandit leo lobortis eget.
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-    </div>*/}
-
-{/*<ListItem
-        key={this.props.itemNo}
-        role={undefined}
-        dense
-        //style={{textDecoration: "line-through"}}
-        //classNameName={itemCheckout}
-        classNameName={classNamees.strikeOut}
-      >
-        <Checkbox
-          checked={checkboxValue}
-          tabIndex={-1}
-          disableRipple
-          onClick={this.completedItem.bind(this)}
-        />
-        <ListItemText
-          primary={this.props.todoTitle}
-          secondary={this.props.todoDetails}
-        />
-        <ListItemText
-          primary={dispDateString}
-          secondary={dispTimeString}
-          classNameName={classNamees.timeItem}
-        />
-        <DeleteIcon
-          color="error"
-          onClick={this.deleteItem.bind(this)}/>
-      </ListItem>*/}
-      
-
-/*TodoItem.propTypes = {
-  classNames: PropTypes.object.isRequired,
-};*/
-
 
 export default TodoItem;

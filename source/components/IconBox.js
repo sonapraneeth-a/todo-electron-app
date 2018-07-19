@@ -1,5 +1,4 @@
 import React from "react";
-import { Icon } from "../../node_modules/@material-ui/core";
 
 const styles = {
   iconBox: {

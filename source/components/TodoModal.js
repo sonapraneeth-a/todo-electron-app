@@ -3,7 +3,7 @@ import BootstrapButton from "./bootstrap/Button";
 import CloseIcon from '@material-ui/icons/Close';
 import SaveIcon from '@material-ui/icons/Save';
 import moment from "moment";
-import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from "reactstrap"
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from "reactstrap";
 
 const styles = {
   leftIcon: {
@@ -16,8 +16,6 @@ class TodoModal extends React.Component
   constructor(props)
   {
     super(props);
-    console.log("Constructor");
-    console.log(this.props.display);
     this.state = {
       open: this.props.display,
       todoTitle: "",
@@ -35,22 +33,19 @@ class TodoModal extends React.Component
     this.handleReminderTime = this.handleReminderTime.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
     this.handleImportant = this.handleImportant.bind(this);
-    // this.handleClickPriority = this.handleClickPriority.bind(this, value);
   }
 
   toggleModal()
   {
-    console.log("Toggle test: " + this.state.open);
     let open_status = !this.state.open;
     this.setState({
       open: open_status
-    })
+    });
     this.props.handleForTodoModal(open_status);
   }
 
   handleSubmit(event)
   {
-    console.log("Handle submit");
     event.preventDefault();
     let todo_info = {
       title: this.state.todoTitle,
@@ -64,13 +59,10 @@ class TodoModal extends React.Component
     this.toggleModal();
     this.props.handleForTodoInfo(todo_info);
     this.render();
-    
   }
 
   handleTitle(event)
   {
-    //event.preventDefault();
-    console.log("Title Modal: " + event.target.value);
     this.setState({
       todoTitle: event.target.value,
     });
@@ -102,10 +94,6 @@ class TodoModal extends React.Component
 
   handleImportant(event)
   {
-    console.log("Important");
-    console.log("Todo: " + this.state.todoImportant);
-    console.log("Value: " + event.target.value);
-    console.log("Value: " + event.target.checked);
     event.preventDefault();
     this.setState({
       todoImportant: event.target.checked,
@@ -114,8 +102,6 @@ class TodoModal extends React.Component
 
   handleClickPriority(value)
   {
-    console.log("Priority");
-    console.log(value);
     this.setState({
       todoPriority: value,
     });
@@ -130,8 +116,6 @@ class TodoModal extends React.Component
     const todoImportant = this.state.todoImportant;
     const todoPriority = this.state.todoPriority;
     const openStatus = this.props.display;
-    console.log("Render TestModal: " + todoDueDate);
-    console.log(this.state.open);
     return (
       <Modal isOpen={openStatus} toggle={this.toggleModal} centered style={{maxWidth: "100%", padding: "0"}}>
           <ModalHeader toggle={this.toggleModal}>Create a TODO</ModalHeader>
@@ -258,12 +242,3 @@ class TodoModal extends React.Component
 }
 
 export default TodoModal;
-
-{/*<div className="input-group-append">
-                <select className="custom-select" value={todoPriority} onChange={this.handlePriority}>
-                  <option value="normal">Normal</option>
-                  <option value="urgent">Urgent</option>
-                  <option value="critical">Critical</option>
-                </select>
-                </div>*/}
-

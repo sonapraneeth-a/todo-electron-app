@@ -9,9 +9,13 @@ class TodayTodos extends React.Component
 
   render()
   {
+    const todoTodayItems = this.props.createTodayItems();
     return (
       <div>
-        <h3>Today Todos</h3>
+        <h4>Today Todos</h4>
+        <div id="accordion-today">
+          {todoTodayItems}
+        </div>
       </div>
     );
   }

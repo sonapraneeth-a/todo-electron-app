@@ -9,101 +9,11 @@ class ImportantTodos extends React.Component
   constructor(props)
   {
     super(props);
-    let listLocation = path.join(process.env.USERPROFILE, "\\Documents", "\\TodoApp", "data.json");
-    let loadTodoList = [];
-    if (fs.existsSync(listLocation))
-    {
-      loadTodoList = JSON.parse(fs.readFileSync(listLocation));
-    }
-    this.state = {
-      todoList: loadTodoList,
-    }
-  }
-
-  handleForDeleteItem(itemNo)
-  {
-    let todoList = this.state.todoList.slice(0, this.state.todoList.length+1);
-    todoList.splice(itemNo, 1);
-    this.setState({
-      todoList: todoList,
-    });
-  }
-
-  handleForCompletedItem(itemNo)
-  {
-    let todoList = this.state.todoList.slice(0, this.state.todoList.length+1);
-    todoList[itemNo].status = (todoList[itemNo].status === "Pending" ? "Completed": "Pending");
-    this.setState({
-      todoList: todoList,
-    });
-  }
-
-  handleForImportantItem(itemNo)
-  {
-    console.log("Item no: " + itemNo);
-    let todoList = this.state.todoList.slice(0, this.state.todoList.length+1);
-    todoList[itemNo].important = (todoList[itemNo].important === true ? false: true);
-    this.setState({
-      todoList: todoList,
-    });
-  }
-
-  componentDidUpdate()
-  {
-    let listDir = path.join(process.env.USERPROFILE, "\\Documents", "\\TodoApp");
-    let listLocation = path.join(process.env.USERPROFILE, "\\Documents", "\\TodoApp", "data.json");
-    if (!fs.existsSync(listDir))
-    {
-      fs.mkdirSync(listDir);
-    }
-    fs.writeFile(
-      listLocation,
-      JSON.stringify(this.state.todoList), "utf-8", 
-      function(err)
-      {
-        if(err) { console.log(err); }
-      }
-    );
-  }
-
-  createImportantItems()
-  {
-    let todoImportantItems = this.state.todoList.map((step, move) =>
-    {
-      const todoTitle = this.state.todoList[move].title;
-      const todoDetails = this.state.todoList[move].details;
-      const todoDueDate = this.state.todoList[move].dueDate;
-      const todoReminderTime = this.state.todoList[move].reminderTime;
-      const todoStatus = this.state.todoList[move].status;
-      const todoImportant = this.state.todoList[move].important;
-      const todoPriority = this.state.todoList[move].priority;
-      if ( todoImportant === true )
-      {
-        return (
-          <TodoItem
-            id={"#accordion-important"}
-            key={move} 
-            todoTitle={todoTitle}
-            todoDetails={todoDetails}
-            todoDueDate={todoDueDate}
-            todoReminderTime={todoReminderTime}
-            todoStatus={todoStatus}
-            todoImportant={todoImportant}
-            todoPriority={todoPriority}
-            itemNo={move}
-            handleForDeleteItem={this.handleForDeleteItem.bind(this)}
-            handleForCompletedItem={this.handleForCompletedItem.bind(this)}
-            handleForImportantItem={this.handleForImportantItem.bind(this)}
-          />
-        );
-      }
-    });
-    return todoImportantItems;
   }
 
   render()
   {
-    const todoImportantItems = this.createImportantItems();
+    const todoImportantItems = this.props.createImportantItems();
     return (
       <div>
         <h4>Important Todos</h4>

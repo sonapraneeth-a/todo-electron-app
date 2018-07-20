@@ -9,7 +9,7 @@ import BootstrapButton from "./bootstrap/Button";
 import TodoModal from "./TodoModal";
 import TodoItem from "./TodoItem";
 
-class GenericTodo extends React.Component
+class GenericTodos extends React.Component
 {
   constructor(props)
   {
@@ -196,4 +196,4 @@ class GenericTodo extends React.Component
   }
 }
 
-export default GenericTodo;
+export default GenericTodos;

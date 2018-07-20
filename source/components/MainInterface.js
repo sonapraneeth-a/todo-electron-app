@@ -6,7 +6,7 @@ import AddIcon from '@material-ui/icons/Add';
 
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
-import GenericTodo from "./GenericTodo";
+import GenericTodos from "./GenericTodos";
 import ImportantTodos from "./ImportantTodos";
 import TodayTodos from "./TodayTodos";
 
@@ -63,7 +63,7 @@ class MainInterface extends React.Component
           />
           <div id="content" style={contentWidth}>
             { this.state.interfaceToShow === "Todo" &&
-              <GenericTodo />
+              <GenericTodos />
             }
             { this.state.interfaceToShow === "Today" &&
               <TodayTodos />

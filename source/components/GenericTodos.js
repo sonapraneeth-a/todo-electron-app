@@ -94,9 +94,9 @@ class GenericTodos extends React.Component
     );
   }
 
-  render()
+  createPendingItems()
   {
-    const todoPendingItems = this.state.todoList.map((step, move) =>
+    let todoPendingItems = this.state.todoList.map((step, move) =>
     {
       const todoTitle = this.state.todoList[move].title;
       const todoDetails = this.state.todoList[move].details;
@@ -126,7 +126,12 @@ class GenericTodos extends React.Component
         );
       }
     });
-    const todoCompletedItems = this.state.todoList.map((step, move) =>
+    return todoPendingItems;
+  }
+
+  createCompletedItems()
+  {
+    let todoCompletedItems = this.state.todoList.map((step, move) =>
     {
       const todoTitle = this.state.todoList[move].title;
       const todoDetails = this.state.todoList[move].details;
@@ -155,6 +160,13 @@ class GenericTodos extends React.Component
         );
       }
     });
+    return todoCompletedItems;
+  }
+
+  render()
+  {
+    const todoPendingItems = this.createPendingItems();
+    const todoCompletedItems = this.createCompletedItems();
     return (
       <div>
         <div className="todo-pending-list">

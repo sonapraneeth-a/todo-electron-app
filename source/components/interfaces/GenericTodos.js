@@ -4,10 +4,10 @@ import path from "path";
 
 import AddIcon from '@material-ui/icons/Add';
 
-import BootstrapButton from "./bootstrap/Button";
+import BootstrapButton from "../bootstrap/Button";
 
-import TodoModal from "./TodoModal";
-import TodoItem from "./TodoItem";
+import TodoModal from "../TodoModal";
+import TodoItem from "../TodoItem";
 
 class GenericTodos extends React.Component
 {

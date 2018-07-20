@@ -6,9 +6,9 @@ import AddIcon from '@material-ui/icons/Add';
 
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
-import GenericTodos from "./GenericTodos";
-import ImportantTodos from "./ImportantTodos";
-import TodayTodos from "./TodayTodos";
+import GenericTodos from "./interfaces/GenericTodos";
+import ImportantTodos from "./interfaces/ImportantTodos";
+import TodayTodos from "./interfaces/TodayTodos";
 
 const styles = {
   contentPart: {

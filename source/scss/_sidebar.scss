@@ -26,7 +26,8 @@
   }
   ul.components
   {
-    padding: 20px 0;
+    padding: 1rem 0;
+    margin-bottom: 0;
     border-bottom: 1px solid #47748b;
   }
   ul li a
@@ -43,6 +44,13 @@
   }
   ul li a:hover
   {
+    text-decoration: none;
+    color: #7386D5;
+    background: #fff;
+  }
+  ul li a.active
+  {
+    text-decoration: none;
     color: #7386D5;
     background: #fff;
   }
@@ -83,6 +91,10 @@ a[data-toggle="collapse"]
   #sidebar.active
   {
     margin-left: 0;
+  }
+  #content 
+  {
+    width: 100%;
   }
 }
 

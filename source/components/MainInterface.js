@@ -34,6 +34,7 @@ class MainInterface extends React.Component
       loadTodoList = JSON.parse(fs.readFileSync(listLocation));
     }
     this.state = {
+      showTodoModal: false,
       showSidebar: true,
       interfaceToShow: "Todo",
       todoList: loadTodoList,
@@ -83,6 +84,21 @@ class MainInterface extends React.Component
     });
   }
 
+  toggleTodo()
+  {
+    let currentModalState = this.state.showTodoModal;
+    this.setState({
+      showTodoModal: !currentModalState,
+    });
+  }
+
+  handleForTodoModal(open)
+  {
+    this.setState({
+      showTodoModal: open
+    });
+  }
+
   handleForTodoInfo(todo_info)
   {
     let todoList = this.state.todoList.slice(0, this.state.todoList.length+1);
@@ -93,8 +109,8 @@ class MainInterface extends React.Component
 
   componentDidUpdate()
   {
-    let listDir = path.join(process.env.USERPROFILE, "\\Documents", "\\TodoApp");
-    let listLocation = path.join(process.env.USERPROFILE, "\\Documents", "\\TodoApp", "data.json");
+    let listDir = path.join(process.env.USERPROFILE, "Documents", "TodoApp");
+    let listLocation = path.join(process.env.USERPROFILE, "Documents", "TodoApp", "data.json");
     if (!fs.existsSync(listDir))
     {
       fs.mkdirSync(listDir);
@@ -267,8 +283,12 @@ class MainInterface extends React.Component
           <div id="content" style={contentWidth}>
             { this.state.interfaceToShow === "Todo" &&
               <GenericTodos
+                showTodoModal={this.state.showTodoModal}
                 createPendingItems={this.createPendingItems.bind(this)}
                 createCompletedItems={this.createCompletedItems.bind(this)}
+                handleForTodoModal={this.handleForTodoModal.bind(this)}
+                handleForTodoInfo={this.handleForTodoInfo.bind(this)}
+                handleForTodoToggle={this.toggleTodo.bind(this)}
               />
             }
             { this.state.interfaceToShow === "Today" &&

@@ -14,31 +14,21 @@ class GenericTodos extends React.Component
   constructor(props)
   {
     super(props);
-    let listLocation = path.join(process.env.USERPROFILE, "\\Documents", "\\TodoApp", "data.json");
-    let loadTodoList = [];
-    if (fs.existsSync(listLocation))
-    {
-      loadTodoList = JSON.parse(fs.readFileSync(listLocation));
-    }
-    this.state = {
-      showTodoModal: false,
-      todoList: loadTodoList,
-    }
   }
 
   toggleTodo()
   {
-    let currentModalState = this.state.showTodoModal;
-    this.setState({
-      showTodoModal: !currentModalState,
-    });
+    this.props.handleForTodoToggle();
   }
 
   handleForTodoModal(open)
   {
-    this.setState({
-      showTodoModal: open
-    });
+    this.props.handleForTodoModal(open);
+  }
+
+  handleForTodoInfo(todo_info)
+  {
+    this.props.handleForTodoInfo(todo_info);
   }
 
   render()
@@ -72,10 +62,10 @@ class GenericTodos extends React.Component
           onClick={this.toggleTodo.bind(this)}>
           <AddIcon />
         </BootstrapButton>
-        { this.state.showTodoModal && 
+        { this.props.showTodoModal && 
           <TodoModal
             id={"todoModal"}
-            display={this.state.showTodoModal}
+            display={this.props.showTodoModal}
             handleForTodoModal={this.handleForTodoModal.bind(this)}
             handleForTodoInfo={this.handleForTodoInfo.bind(this)}
             onClick={this.toggleTodo.bind(this)}

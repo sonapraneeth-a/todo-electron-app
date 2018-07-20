@@ -7,6 +7,8 @@ import AddIcon from '@material-ui/icons/Add';
 import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import GenericTodo from "./GenericTodo";
+import ImportantTodos from "./ImportantTodos";
+import TodayTodos from "./TodayTodos";
 
 const styles = {
   contentPart: {
@@ -36,6 +38,13 @@ class MainInterface extends React.Component
     });
   }
 
+  handleforSidebarItem(value)
+  {
+    this.setState({
+      interfaceToShow: value,
+    });
+  }
+
   render()
   {
     let contentWidth;
@@ -47,10 +56,20 @@ class MainInterface extends React.Component
       <div style={{display: "flex", flexDirection: "column"}}>
         <Navbar onClick={this.toggleSidebar.bind(this)}/>
         <div className="main-interface">
-          <Sidebar show={this.state.showSidebar}/>
+          <Sidebar
+            show={this.state.showSidebar}
+            handleSidebarItem={this.handleforSidebarItem.bind(this)}
+            interfaceToShow={this.state.interfaceToShow}
+          />
           <div id="content" style={contentWidth}>
             { this.state.interfaceToShow === "Todo" &&
               <GenericTodo />
+            }
+            { this.state.interfaceToShow === "Today" &&
+              <TodayTodos />
+            }
+            { this.state.interfaceToShow === "Important" &&
+              <ImportantTodos />
             }
           </div>
         </div>

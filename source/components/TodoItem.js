@@ -63,6 +63,7 @@ class TodoItem extends React.Component
           }
           { this.props.todoStatus === "Completed" && 
             <CheckCircleIcon
+              style={{color: "green"}}
               onClick={this.completedItem.bind(this)}
             />
           }

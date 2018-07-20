@@ -40,11 +40,30 @@ class ImportantTodos extends React.Component
 
   handleForImportantItem(itemNo)
   {
+    console.log("Item no: " + itemNo);
     let todoList = this.state.todoList.slice(0, this.state.todoList.length+1);
     todoList[itemNo].important = (todoList[itemNo].important === true ? false: true);
     this.setState({
       todoList: todoList,
     });
+  }
+
+  componentDidUpdate()
+  {
+    let listDir = path.join(process.env.USERPROFILE, "\\Documents", "\\TodoApp");
+    let listLocation = path.join(process.env.USERPROFILE, "\\Documents", "\\TodoApp", "data.json");
+    if (!fs.existsSync(listDir))
+    {
+      fs.mkdirSync(listDir);
+    }
+    fs.writeFile(
+      listLocation,
+      JSON.stringify(this.state.todoList), "utf-8", 
+      function(err)
+      {
+        if(err) { console.log(err); }
+      }
+    );
   }
 
   createImportantItems()

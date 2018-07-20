@@ -67,12 +67,12 @@ class Sidebar extends React.Component
             }
           </li>
           <li onClick={this.handleItemClick.bind(this, "Create New List")}>
-            <a href="#"><AddIcon style={styles.leftIcon} />Create new list</a>
+            <a href="#" className="disabled"><AddIcon style={styles.leftIcon} />Create new list</a>
           </li>
         </ul>
         <ul className="list-unstyled components">
           <li>
-            <a href="#"><FormatListBulletedIcon style={styles.leftIcon} />List name</a>
+            <a href="#" className="disabled"><FormatListBulletedIcon style={styles.leftIcon} />List name</a>
           </li>
         </ul>
     </nav>

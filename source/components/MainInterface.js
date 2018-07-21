@@ -117,7 +117,7 @@ class MainInterface extends React.Component
     }
     fs.writeFile(
       listLocation,
-      JSON.stringify(this.state.todoList), "utf-8", 
+      JSON.stringify(this.state.todoList, null, 2), "utf-8", 
       function(err)
       {
         if(err) { console.log(err); }

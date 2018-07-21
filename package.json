@@ -37,6 +37,7 @@
     "marked": "^0.4.0",
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.21",
+    "npm": "^6.2.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "reactstrap": "^6.3.0"
